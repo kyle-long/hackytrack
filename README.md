@@ -33,6 +33,8 @@ Elapsed Time : 0:00:03.906421
 Elapsed Time : 0:00:06.790382
 > Name : TAG2: <-- will go with the above task
 Elapsed Time : 0:00:10.977127
+> Name : Done
+Elapsed Time : 0:14:31.114860
 ```
 
 To exit use Ctrl+c (SIGINIT).  Pretty hacky.
@@ -46,8 +48,8 @@ If you want a breakdown of your day, you an use `hackyanalyze`.  Just specify a 
 hackyanalyze 2016-05-26 
 OTHER: 0:00:10.791086
 TAG1: 0:00:09.084222
-TAG2: 0:00:10.977127
-Total: 0:00:30.852435
+TAG2: 0:14:42.091987
+Total: 0:15:01.967295
 ```
 
 You can also add a "more" argument to get a more detailed breakdown.  It doesn't actually need to say "more".  It can be anything. In the future I plan to use docopt to make the interface better.
@@ -60,9 +62,10 @@ OTHER: 0:00:10.791086
 TAG1: 0:00:09.084222
     doing some stuff: 0:00:05.177801
     doing some other stuff: 0:00:03.906421
-TAG2: 0:00:10.977127
+TAG2: 0:14:42.091987
     A tag all its own: 0:00:10.977127
-Total: 0:00:30.852435
+    <-- will go with the above task: 0:14:31.114860
+Total: 0:15:01.967295
 ```
 
 Thats about it.
