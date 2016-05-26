@@ -50,4 +50,19 @@ TAG2: 0:00:10.977127
 Total: 0:00:30.852435
 ```
 
+You can also add a "more" argument to get a more detailed breakdown.  It doesn't actually need to say "more".  It can be anything. In the future I plan to use docopt to make the interface better.
+
+```
+hackyanalyze 2016-05-26 more
+OTHER: 0:00:10.791086
+    blah: 0:00:04.000704
+    This will show up in other: 0:00:06.790382
+TAG1: 0:00:09.084222
+    doing some stuff: 0:00:05.177801
+    doing some other stuff: 0:00:03.906421
+TAG2: 0:00:10.977127
+    A tag all its own: 0:00:10.977127
+Total: 0:00:30.852435
+```
+
 Thats about it.
