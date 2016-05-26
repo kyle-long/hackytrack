@@ -5,6 +5,10 @@ import datetime
 import re
 
 filename = sys.argv[1]
+output_more = False
+
+if len(sys.argv) > 2:
+    output_more = True
 
 contents = ""
 with open(filename) as f:
@@ -20,21 +24,29 @@ for item in contents:
 
     key = "OTHER"
 
-    if ":" in item["name"]:
-        key = re.search(".*?(?=:)", item["name"]).group(0)
+    name = item["name"]
+    if ":" in name:
+        key = re.search(".*?(?=:)", name).group(0)
+        name = re.sub(".*?:", "", name, 1).strip()
 
     elapsed = item["elapsed"]
     d = datetime.datetime.strptime(elapsed, "%H:%M:%S.%f")
     delta = datetime.timedelta(hours=d.hour, minutes=d.minute, seconds=d.second, microseconds=d.microsecond)
     if key not in sub_totals:
-        sub_totals[key] = delta
+        sub_totals[key] = {}
+        sub_totals[key]["total"] = delta
+        sub_totals[key]["task_list"] = []
     else:
-        sub_totals[key] += delta
+        sub_totals[key]["total"] += delta
+
+    sub_totals[key]["task_list"].append("{0}: {1}".format(name, delta))
 
     total += delta
 
-for total_type, delta in sub_totals.iteritems():
-    print "{0}: {1}".format(total_type, delta)
-
+for total_type, item_data in sub_totals.iteritems():
+    print "{0}: {1}".format(total_type, item_data["total"])
+    if output_more:
+        for task in item_data["task_list"]:
+            print "\t{0}".format(task)
 
 print "{0}: {1}".format("Total", total)
