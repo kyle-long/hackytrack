@@ -17,7 +17,7 @@ reader = RecordReader(today)
 reader.read()
 
 while True:
-    name = raw_input("> Name : ")
+    name = raw_input("> ")
     last_record = reader.last_record()
     now = datetime.datetime.now()
     if last_record:

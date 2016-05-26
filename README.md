@@ -22,18 +22,18 @@ Find yourself a directory you would like to store your tracking files in.  `hack
 
 ```
 hackytrack
-> Name : blah
-> Name : TAG1: doing some stuff
+> blah
+> TAG1: doing some stuff
 Elapsed Time : 0:00:04.000704
-> Name : TAG1: doing some other stuff
+> TAG1: doing some other stuff
 Elapsed Time : 0:00:05.177801
-> Name : This will show up in other
+> This will show up in other
 Elapsed Time : 0:00:03.906421
-> Name : TAG2: A tag all its own
+> TAG2: A tag all its own
 Elapsed Time : 0:00:06.790382
-> Name : TAG2: <-- will go with the above task
+> TAG2: <-- will go with the above task
 Elapsed Time : 0:00:10.977127
-> Name : Done
+> Done
 Elapsed Time : 0:14:31.114860
 ```
 
