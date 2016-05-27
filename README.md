@@ -9,7 +9,7 @@ Installation
 At the moment you can only install via pip.
 
 ```
-pip install git+git://github.com/kyle-long/hackytrack.git@master
+pip install https://github.com/kyle-long/hackytrack/archive/master.zip
 ```
 
 Usage
