@@ -5,7 +5,7 @@ except ImportError:
 
 config = {
     "description": "A command line interface for tracking time.",
-    "author": "Kyle Long",
+    "author": "Kyle Long and Andy Gertjejansen",
     "url": "none",
     "download_url": "none",
     "author_email": "uilwen@gmail.com",
