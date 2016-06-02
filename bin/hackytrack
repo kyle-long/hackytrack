@@ -3,11 +3,10 @@
 import datetime
 import dateutil.parser
 import os
+from hackytrack import utils
 from hackytrack.record_reader import RecordReader
 
-date = datetime.datetime.now()
-
-today = date.strftime("%Y-%m-%d")
+today = utils.get_today()
 
 if not os.path.isfile(today):
     # like touch
