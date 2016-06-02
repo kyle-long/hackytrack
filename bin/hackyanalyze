@@ -3,12 +3,21 @@ import sys
 import json
 import datetime
 import re
+import docopt
 
-filename = sys.argv[1]
-output_more = False
 
-if len(sys.argv) > 2:
-    output_more = True
+doc = """Usage: ./hackyanalyze <filename> [options]
+
+    Options:
+        -o --output-more            Outputs more tracking info from given file.
+
+    Arguments:
+        <filename>                  Name of hackytrack file to analyze.
+"""
+
+args = docopt.docopt(doc)
+
+filename = args["<filename>"]
 
 contents = ""
 with open(filename) as f:
@@ -45,7 +54,7 @@ for item in contents:
 
 for total_type, item_data in sub_totals.iteritems():
     print "{0}: {1}".format(total_type, item_data["total"])
-    if output_more:
+    if args["--output-more"]:
         for task in item_data["task_list"]:
             print "\t{0}".format(task)
 
