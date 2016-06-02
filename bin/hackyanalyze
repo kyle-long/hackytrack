@@ -3,21 +3,34 @@ import sys
 import json
 import datetime
 import re
+import os
 import docopt
+from hackytrack import utils
 
 
-doc = """Usage: ./hackyanalyze <filename> [options]
+doc = """ hackyanalyze
+
+    Analyzes hackytrack output files. If run without options current day's file
+    will be analyzed.
+
+    Usage: hackyanalyze [options]
 
     Options:
-        -o --output-more            Outputs more tracking info from given file.
+        -f --file <FILE>    File to analyze. Defaults to current day tracking file.
 
-    Arguments:
-        <filename>                  Name of hackytrack file to analyze.
+        -m --more           Outputs more tracking info from given file.
+                            [default: False]
 """
 
 args = docopt.docopt(doc)
+filename = args.get("--file")
 
-filename = args["<filename>"]
+if not filename:
+    filename = utils.get_today()
+
+if not os.path.isfile(filename):
+    print "Error file {0} does not exist".format(filename)
+    sys.exit(1)
 
 contents = ""
 with open(filename) as f:
@@ -54,7 +67,7 @@ for item in contents:
 
 for total_type, item_data in sub_totals.iteritems():
     print "{0}: {1}".format(total_type, item_data["total"])
-    if args["--output-more"]:
+    if args["--more"]:
         for task in item_data["task_list"]:
             print "\t{0}".format(task)
 
