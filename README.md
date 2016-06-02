@@ -42,20 +42,26 @@ To exit use Ctrl+c (SIGINIT).  Pretty hacky.
 hackyanalyze
 ------------
 
-If you want a breakdown of your day, you an use `hackyanalyze`.  Just specify a file that `hackytrack` has created.
+If you want a breakdown of your day, you an use `hackyanalyze`.  You can simply run hackyanalyze to analyze current day's info and if you would like to analyze another days file simply pass it in.
 
 ```
-hackyanalyze 2016-05-26 
+hackyanalyze
+OTHER: 0:00:10.791086
+TAG1: 0:00:09.084222
+TAG2: 0:14:42.091987
+Total: 0:15:01.967295
+
+hackyanalyze 2016-05-26
 OTHER: 0:00:10.791086
 TAG1: 0:00:09.084222
 TAG2: 0:14:42.091987
 Total: 0:15:01.967295
 ```
 
-You can also add a "more" argument to get a more detailed breakdown.  It doesn't actually need to say "more".  It can be anything. In the future I plan to use docopt to make the interface better.
+You can also add a "--more" argument to get a more detailed breakdown.
 
 ```
-hackyanalyze 2016-05-26 more
+hackyanalyze 2016-05-26 --more
 OTHER: 0:00:10.791086
     blah: 0:00:04.000704
     This will show up in other: 0:00:06.790382

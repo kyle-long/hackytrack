@@ -3,7 +3,7 @@
 import datetime
 import dateutil.parser
 import os
-import utils
+from hackytrack import utils
 from hackytrack.record_reader import RecordReader
 
 today = utils.get_today()

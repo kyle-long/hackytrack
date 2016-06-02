@@ -13,17 +13,18 @@ doc = """ hackyanalyze
     Analyzes hackytrack output files. If run without options current day's file
     will be analyzed.
 
-    Usage: hackyanalyze [options]
+    Usage: hackyanalyze [<filename>] [options]
 
     Options:
-        -f --file <FILE>    File to analyze. Defaults to current day tracking file.
-
         -m --more           Outputs more tracking info from given file.
                             [default: False]
+
+    Arguments:
+        <filename>          Name of file to analyze. If not given it defaults to current day's file.
 """
 
 args = docopt.docopt(doc)
-filename = args.get("--file")
+filename = args.get("<filename>")
 
 if not filename:
     filename = utils.get_today()
