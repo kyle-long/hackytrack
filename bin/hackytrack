@@ -26,7 +26,7 @@ reader.read()
 while True:
     name = raw_input("> ")
 
-    if name == "stop":
+    if name == "exit":
         break
 
     last_record = reader.last_record()

@@ -43,7 +43,7 @@ Elapsed Time : 0:00:10.977127
 Elapsed Time : 0:14:31.114860
 ```
 
-To exit use "stop" keyword.
+To exit use "exit" keyword.
 
 hackyanalyze
 ------------
