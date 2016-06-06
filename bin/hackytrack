@@ -7,6 +7,7 @@ import readline
 from hackytrack import utils
 from hackytrack.record_reader import RecordReader
 from hackytrack.text_completer import TextCompleter
+import logging
 
 readline.set_completer(TextCompleter().complete)
 readline.parse_and_bind("tab: complete")

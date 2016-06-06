@@ -25,9 +25,9 @@ class TextCompleter(object):
 
         if state == 0:
             if text:
-                self.matches = [s for s in history if s and s.startswith(text)]
+                self.matches = sorted(s for s in history if s and s.startswith(text))
             else:
-                self.matches = self.options[:]
+                self.matches = []
 
             try:
                 response = self.matches[state]
