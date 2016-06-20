@@ -8,6 +8,9 @@ class TextCompleter(object):
     HISTORY_FILE = ".hacky.hist"
 
     def __init__(self):
+        readline.read_history_file(TextCompleter.HISTORY_FILE)
+        # limiting to 1000 entries.
+        readline.set_history_length(1000)
         self.matches = []
 
     def complete(self, text, state):
