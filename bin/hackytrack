@@ -10,6 +10,7 @@ from hackytrack.text_completer import TextCompleter
 
 readline.set_completer(TextCompleter().complete)
 readline.parse_and_bind("tab: complete")
+readline.set_completer_delims("\n")
 
 today = utils.get_today()
 

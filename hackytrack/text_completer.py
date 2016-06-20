@@ -11,7 +11,6 @@ class TextCompleter(object):
         readline.read_history_file(TextCompleter.HISTORY_FILE)
         # limiting to 1000 entries.
         readline.set_history_length(1000)
-        self.matches = []
 
     def complete(self, text, state):
         """
@@ -25,17 +24,15 @@ class TextCompleter(object):
         """
         response = None
         history = self.get_history()
+        matches = []
 
-        if state == 0:
-            if text:
-                self.matches = sorted(s for s in history if s and s.startswith(text))
-            else:
-                self.matches = []
+        if text:
+            matches = sorted(s for s in history if s and s.startswith(text))
 
-            try:
-                response = self.matches[state]
-            except IndexError:
-                response = None
+        try:
+            response = matches[state]
+        except IndexError:
+            response = None
 
         return response
 
