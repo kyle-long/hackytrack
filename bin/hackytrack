@@ -27,9 +27,6 @@ reader.read()
 while True:
     name = raw_input("> ")
 
-    if name == "exit":
-        break
-
     last_record = reader.last_record()
     now = datetime.datetime.now()
     if last_record:
@@ -47,4 +44,7 @@ while True:
 
     reader.add_record(record)
     reader.write()
+    if name == "exit":
+        break
+
     readline.write_history_file(TextCompleter.HISTORY_FILE)
