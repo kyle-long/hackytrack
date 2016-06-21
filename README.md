@@ -3,6 +3,12 @@ HackyTrack
 
 A simple command line tool for tracking time.  It works like a stop watch.  It doesn't do much else.  I am not proud of the code (thats where hacky comes from!)
 
+Notable Features
+----------------
+
+- It supports tab completion.
+- You can move through history with the up and down keys just like good ol' bash!
+
 Installation
 ============
 
@@ -37,7 +43,7 @@ Elapsed Time : 0:00:10.977127
 Elapsed Time : 0:14:31.114860
 ```
 
-To exit use Ctrl+c (SIGINIT).  Pretty hacky.
+To exit use "exit" keyword.
 
 hackyanalyze
 ------------

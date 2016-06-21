@@ -3,8 +3,14 @@
 import datetime
 import dateutil.parser
 import os
+import readline
 from hackytrack import utils
 from hackytrack.record_reader import RecordReader
+from hackytrack.text_completer import TextCompleter
+
+readline.set_completer(TextCompleter().complete)
+readline.parse_and_bind("tab: complete")
+readline.set_completer_delims("\n")
 
 today = utils.get_today()
 
@@ -12,11 +18,15 @@ if not os.path.isfile(today):
     # like touch
     open(today, "w").close()
 
+if not os.path.isfile(TextCompleter.HISTORY_FILE):
+    open(TextCompleter.HISTORY_FILE, "w").close()
+
 reader = RecordReader(today)
 reader.read()
 
 while True:
     name = raw_input("> ")
+
     last_record = reader.last_record()
     now = datetime.datetime.now()
     if last_record:
@@ -34,3 +44,7 @@ while True:
 
     reader.add_record(record)
     reader.write()
+    if name == "exit":
+        break
+
+    readline.write_history_file(TextCompleter.HISTORY_FILE)
