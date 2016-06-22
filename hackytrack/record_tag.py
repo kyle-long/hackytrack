@@ -15,7 +15,7 @@ class RecordTag(object):
         return total
 
     @property
-    def combined_name_list(self):
+    def combined_item_list(self):
         combined_list = []
 
         for item in self.item_list:
