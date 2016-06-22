@@ -64,10 +64,10 @@ TAG2: 0:14:42.091987
 Total: 0:15:01.967295
 ```
 
-You can also add a "--more" argument to get a more detailed breakdown.
+You can also add a `-v` (for verbose) option to get a more detailed breakdown.  You can add additonal more `v`s to get more detail.
 
 ```
-hackyanalyze 2016-05-26 --more
+hackyanalyze 2016-05-26 -v
 OTHER: 0:00:10.791086
     blah: 0:00:04.000704
     This will show up in other: 0:00:06.790382
