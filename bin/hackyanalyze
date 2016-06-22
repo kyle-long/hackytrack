@@ -13,11 +13,13 @@ doc = """ hackyanalyze
     Analyzes hackytrack output files. If run without options current day's file
     will be analyzed.
 
-    Usage: hackyanalyze [<filename>] [options]
+    Usage: hackyanalyze [<filename>] [-v...]
 
     Options:
-        -m --more           Outputs more tracking info from given file.
-                            [default: False]
+        -v                  Outputs more tracking info from given file.
+                            Add additional v characters to show more
+                            detail.
+                            [default: 0]
 
     Arguments:
         <filename>          Name of file to analyze. If not given it defaults to current day's file.
