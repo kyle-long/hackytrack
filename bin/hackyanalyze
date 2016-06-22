@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 import sys
 import json
-import datetime
-import re
 import os
 import docopt
 from hackytrack import utils
+from hackytrack.record_list_interpreter import RecordListInterpreter
+from hackytrack.analyze_view import AnalyzeView
 
 
 doc = """ hackyanalyze
@@ -40,38 +40,15 @@ with open(filename) as f:
     contents = f.read()
 
 contents = json.loads(contents)
-sub_totals = {}
-total = datetime.timedelta()
+interpreter = RecordListInterpreter(contents)
+interpreter.process()
+view = AnalyzeView(interpreter.total, interpreter.record_tags)
 
-for item in contents:
-    if "elapsed" not in item:
-        continue
+v = args["-v"]
 
-    key = "OTHER"
-
-    name = item["name"]
-    if ":" in name:
-        key = re.search(".*?(?=:)", name).group(0)
-        name = re.sub(".*?:", "", name, 1).strip()
-
-    elapsed = item["elapsed"]
-    d = datetime.datetime.strptime(elapsed, "%H:%M:%S.%f")
-    delta = datetime.timedelta(hours=d.hour, minutes=d.minute, seconds=d.second, microseconds=d.microsecond)
-    if key not in sub_totals:
-        sub_totals[key] = {}
-        sub_totals[key]["total"] = delta
-        sub_totals[key]["task_list"] = []
-    else:
-        sub_totals[key]["total"] += delta
-
-    sub_totals[key]["task_list"].append("{0}: {1}".format(name, delta))
-
-    total += delta
-
-for total_type, item_data in sub_totals.iteritems():
-    print "{0}: {1}".format(total_type, item_data["total"])
-    if args["--more"]:
-        for task in item_data["task_list"]:
-            print "\t{0}".format(task)
-
-print "{0}: {1}".format("Total", total)
+if v == 0:
+    print view.get_tag_total()
+elif v == 1:
+    print view.get_combined_items()
+else:
+    print view.get_individual_items()

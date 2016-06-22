@@ -7,7 +7,7 @@ class RecordListInterpreter(object):
     def __init__(self, record_list):
         self.record_list = record_list
         self.total = datetime.timedelta()
-        self.record_tag_list = {}
+        self.record_tags = {}
 
     def process(self):
         """
@@ -21,7 +21,7 @@ class RecordListInterpreter(object):
     def _process_record(self, record):
         """
             Takes a single record and uses it to add
-            to the by_tags dict and add its delta to
+            to the record_tags dict and add its delta to
             the total.
 
             Example of record:
@@ -35,6 +35,9 @@ class RecordListInterpreter(object):
             Args:
                 record(dict)
         """
+        if "elapsed" not in record:
+            return
+
         key = "OTHER"
 
         name = record["name"]
@@ -43,16 +46,16 @@ class RecordListInterpreter(object):
             name = re.sub(".*?:", "", name, 1).strip()
 
         elapsed = record["elapsed"]
-        delta = self.to_delta(elapsed)
+        delta = self._to_delta(elapsed)
         item = {
             "name": name,
             "delta": delta
         }
 
-        if key not in self.by_tags:
-            self.by_tags[key] = RecordTag(key)
+        if key not in self.record_tags:
+            self.record_tags[key] = RecordTag(key)
 
-        self.by_tags[key].add_item(item)
+        self.record_tags[key].add_item(item)
 
         self.total += delta
 
