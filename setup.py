@@ -11,7 +11,8 @@ config = {
     "author_email": "uilwen@gmail.com",
     "version": "0.1",
     "install_requires": [
-        "docopt"
+        "docopt",
+        "python-dateutil"
     ],
     "tests_require": [],
     "packages": ["hackytrack"],
