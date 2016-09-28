@@ -27,6 +27,9 @@ reader.read()
 while True:
     name = raw_input("> ")
 
+    if not name:
+        continue
+
     last_record = reader.last_record()
     now = datetime.datetime.now()
     if last_record:
