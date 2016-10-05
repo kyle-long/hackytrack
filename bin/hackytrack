@@ -7,6 +7,7 @@ import readline
 from hackytrack import utils
 from hackytrack.record_reader import RecordReader
 from hackytrack.text_completer import TextCompleter
+from hackytrack.keyword import Keyword
 
 if not os.path.isfile(TextCompleter.HISTORY_FILE):
     open(TextCompleter.HISTORY_FILE, "w").close()
@@ -38,7 +39,8 @@ while True:
         delta = now - start
         delta_str = str(delta)
         last_record["elapsed"] = delta_str
-        print "Elapsed Time : %s" % delta_str
+        if last_record["name"] != Keyword.EXIT:
+            print "Elapsed Time : %s" % delta_str
 
     record = {
         "name": name,
@@ -47,7 +49,7 @@ while True:
 
     reader.add_record(record)
     reader.write()
-    if name == "exit":
+    if name == Keyword.EXIT:
         break
 
     readline.write_history_file(TextCompleter.HISTORY_FILE)
