@@ -15,7 +15,10 @@ config = {
         "python-dateutil"
     ],
     "tests_require": [],
-    "packages": ["hackytrack"],
+    "packages": [
+        "hackytrack",
+        "hackytrack.syntax"
+    ],
     "scripts": [
         "bin/hackytrack",
         "bin/hackyanalyze"
