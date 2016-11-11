@@ -8,6 +8,7 @@ from hackytrack import utils
 from hackytrack.record_reader import RecordReader
 from hackytrack.text_completer import TextCompleter
 from hackytrack.keyword import Keyword
+from hackytrack.syntax.parser import Parser
 
 if not os.path.isfile(TextCompleter.HISTORY_FILE):
     open(TextCompleter.HISTORY_FILE, "w").close()
@@ -25,29 +26,37 @@ if not os.path.isfile(today):
 reader = RecordReader(today)
 reader.read()
 
+parser = Parser(reader)
+
 while True:
     name = raw_input("> ")
 
     if not name:
         continue
 
-    last_record = reader.last_record()
-    now = datetime.datetime.now()
-    if last_record:
-        last_record["end"] = now.isoformat()
-        start = dateutil.parser.parse(last_record["start"])
-        delta = now - start
-        delta_str = str(delta)
-        last_record["elapsed"] = delta_str
-        if last_record["name"] != Keyword.EXIT:
-            print "Elapsed Time : %s" % delta_str
+    action = parser.find_command(name)
 
-    record = {
-        "name": name,
-        "start": now.isoformat()
-    }
+    if action:
+        action.process()
+    else:
+        last_record = reader.get(1)
+        now = datetime.datetime.now()
+        if last_record:
+            last_record["end"] = now.isoformat()
+            start = dateutil.parser.parse(last_record["start"])
+            delta = now - start
+            delta_str = str(delta)
+            last_record["elapsed"] = delta_str
+            if last_record["name"] != Keyword.EXIT:
+                print "Elapsed Time : %s" % delta_str
 
-    reader.add_record(record)
+        record = {
+            "name": name,
+            "start": now.isoformat()
+        }
+
+        reader.add_record(record)
+    
     reader.write()
     if name == Keyword.EXIT:
         break
