@@ -9,7 +9,7 @@ config = {
     "url": "none",
     "download_url": "none",
     "author_email": "uilwen@gmail.com",
-    "version": "0.1",
+    "version": "0.2",
     "install_requires": [
         "docopt",
         "python-dateutil"
