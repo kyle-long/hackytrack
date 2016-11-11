@@ -7,11 +7,8 @@ class Parser(object):
 
     def find_command(self, line):
         line = line.strip()
-        command = None
-        if line[0] == "/":
-            removed_special_character = line[1:]
-            command_parts = removed_special_character.split(" ")
-            command = self._determine_command(command_parts)
+        command_parts = line.split(" ")
+        command = self._determine_command(command_parts)
 
         return command
 
@@ -20,3 +17,5 @@ class Parser(object):
         command_parts = command_parts[1:]
         if command == "rename":
             return Rename(self.record_reader, command_parts)
+
+        return None

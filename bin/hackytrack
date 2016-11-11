@@ -34,10 +34,15 @@ while True:
     if not name:
         continue
 
-    action = parser.find_command(name)
+    if name[0] == "/":
+        # Determined to be a special command
+        action = parser.find_command(name[1:])
 
-    if action:
-        action.process()
+        if action:
+            action.process()
+        else:
+            print "Invalid command {0}".format(name)
+            continue
     else:
         last_record = reader.get(1)
         now = datetime.datetime.now()
