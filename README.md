@@ -80,4 +80,17 @@ TAG2: 0:14:42.091987
 Total: 0:15:01.967295
 ```
 
+Special Syntax
+==============
+
+Rename
+------
+You have the ability to rename a record if you wish. The syntax is like so
+
+```
+> /rename <numberOfTasksPreviously> <newName>
+```
+
+Where `numberOfTasksPreviously` specifies the number of tasks we should go back in history to alter (**Note: It is not zero indexed. So use `1` if you wish to alter the last task**) and where `newName` is what you would like to rename it as.
+
 Thats about it.

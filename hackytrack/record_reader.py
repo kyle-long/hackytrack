@@ -13,12 +13,12 @@ class RecordReader(object):
             if content:
                 self.record_list = json.loads(content)
 
-    def last_record(self):
-        last = None
+    def get(self, index):
+        record = None
         if len(self.record_list):
-            last = self.record_list[-1]
+            record = self.record_list[-index]
 
-        return last
+        return record
 
     def add_record(self, record):
         self.record_list.append(record)
