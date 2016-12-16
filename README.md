@@ -109,3 +109,10 @@ You have the ability to rename a record if you wish. The syntax is like so
 Where `numberOfTasksPreviously` specifies the number of tasks we should go back in history to alter (**Note: It is not zero indexed. So use `1` if you wish to alter the last task**) and where `newName` is what you would like to rename it as.
 
 Thats about it.
+
+Why did I build this?
+=====================
+
+There are plenty of time tracking command line utilities already. The reason I built this one was I wanted everything to work with as little typing and with as little complexity as possible. Many time tracking projects use a lot of options and force me to type the name of the tracking utility every time I'd like to add a task. Some even make you specifically clock out and back in.
+
+This tool has grown organically based on the features I would like without making the original idea more complicated. A single prompt that you can enter a message in. It won't work for everyone but hey, it works for me.
