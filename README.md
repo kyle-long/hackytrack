@@ -8,6 +8,7 @@ Notable Features
 
 - It supports tab completion.
 - You can move through history with the up and down keys just like good ol' bash!
+- You can tag things. Anything before the first `:` will count as a tag. If you'd like, you can use subtags as well, which will show up when using `hackyanalyze`.
 
 Installation
 ============
@@ -82,6 +83,20 @@ Total: 0:15:01.967295
 
 Special Syntax
 ==============
+
+Tags
+----
+
+Anything before the first `:` is a tag. These are used organize tasks when using `hackyanalyze`. You are also able to use subtags. For example `MY_TAG: my task` will show up as.
+
+    MY_TAG: <totalTime>
+        my task: <timeForThisTask
+
+If you'd like to use a subtag, you can enter a `>` after the initial tag. You can enter as many as you'd like. For example `MY_TAG > MY_SUBTAG: my task` would show up as
+
+    MY_TAG: <totalTime>
+        MY_SUBTAG: <totalTimeForSubtag>
+            my task: <timeForThisTask>
 
 Rename
 ------
