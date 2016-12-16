@@ -87,12 +87,12 @@ Special Syntax
 Tags
 ----
 
-Anything before the first `:` is a tag. These are used organize tasks when using `hackyanalyze`. You are also able to use subtags. For example `MY_TAG: my task` will show up as.
+Anything before the first `:` is a tag. These are used organize tasks when using `hackyanalyze`. You are also able to use subtags. For example `MY_TAG: my task` will show up as...
 
     MY_TAG: <totalTime>
-        my task: <timeForThisTask
+        my task: <timeForThisTask>
 
-If you'd like to use a subtag, you can enter a `>` after the initial tag. You can enter as many as you'd like. For example `MY_TAG > MY_SUBTAG: my task` would show up as
+If you'd like to use a subtag, you can enter a `>` after the initial tag. You can enter as many as you'd like. For example `MY_TAG > MY_SUBTAG: my task` would show up as...
 
     MY_TAG: <totalTime>
         MY_SUBTAG: <totalTimeForSubtag>
