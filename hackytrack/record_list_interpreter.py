@@ -1,13 +1,13 @@
 import datetime
-import re
 from hackytrack.record_tag import RecordTag
+from hackytrack.record import Record
+import re
 
 
 class RecordListInterpreter(object):
     def __init__(self, record_list):
         self.record_list = record_list
-        self.total = datetime.timedelta()
-        self.record_tags = {}
+        self.top_record_tag = RecordTag()
 
     def process(self):
         """
@@ -18,7 +18,7 @@ class RecordListInterpreter(object):
         for record in self.record_list:
             self._process_record(record)
 
-    def _process_record(self, record):
+    def _process_record(self, r):
         """
             Takes a single record and uses it to add
             to the record_tags dict and add its delta to
@@ -33,31 +33,20 @@ class RecordListInterpreter(object):
             }
 
             Args:
-                record(dict)
+               r(dict)
         """
-        if "elapsed" not in record:
+        if "elapsed" not in r:
             return
 
-        key = "OTHER"
-
-        name = record["name"]
+        key = ""
+        name = r["name"]
         if ":" in name:
             key = re.search(".*?(?=:)", name).group(0)
-            name = re.sub(".*?:", "", name, 1).strip()
 
-        elapsed = record["elapsed"]
+        elapsed = r["elapsed"]
         delta = self._to_delta(elapsed)
-        item = {
-            "name": name,
-            "delta": delta
-        }
-
-        if key not in self.record_tags:
-            self.record_tags[key] = RecordTag(key)
-
-        self.record_tags[key].add_item(item)
-
-        self.total += delta
+        record = Record(name, delta)
+        self.top_record_tag.add(key, record)
 
     def _to_delta(self, elapsed):
         """

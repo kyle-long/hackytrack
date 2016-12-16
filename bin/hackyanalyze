@@ -42,7 +42,7 @@ with open(filename) as f:
 contents = json.loads(contents)
 interpreter = RecordListInterpreter(contents)
 interpreter.process()
-view = AnalyzeView(interpreter.total, interpreter.record_tags)
+view = AnalyzeView(interpreter.top_record_tag)
 
 v = args["-v"]
 

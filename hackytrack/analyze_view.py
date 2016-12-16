@@ -4,51 +4,56 @@ class AnalyzeView(object):
         in various ways.
     """
 
-    def __init__(self, total, record_tags):
+    def __init__(self, top_record_tag):
         """
             Args:
                 total(datetime.timedelta)
-                record_tags(List[hackytrack.record_tag.RecordTag)
+                top_record_tag(hacktrack.record_tag.RecordTag)
         """
-        self.record_tags = record_tags
-        self.total = total
+        self.top_record_tag = top_record_tag
+        self.total = top_record_tag.total
 
     def get_tag_total(self):
-        output = ""
+        output = []
 
-        for name, tag in self.record_tags.iteritems():
-            output += "{0}: {1}\n".format(tag.name, tag.total)
+        for tag in self.top_record_tag.record_tag_list:
+            output.append("{0}: {1}".format(tag.tag, tag.total))
 
-        output += self._get_total()
-        return output
+        output.append(self._get_total())
+        return "\n".join(output)
 
     def get_combined_items(self):
-        output = ""
+        output = []
+        for record_tag in self.top_record_tag.record_tag_list:
+            self._generate_record_tag("", output, True, record_tag)
 
-        for name, tag in self.record_tags.iteritems():
-            output += "{0}: {1}\n".format(tag.name, tag.total)
-            output += self._get_item_list(tag.combined_item_list)
+        output.append(self._get_total())
 
-        output += self._get_total()
-
-        return output
+        return "\n".join(output)
 
     def get_individual_items(self):
-        output = ""
+        output = []
+        for record_tag in self.top_record_tag.record_tag_list:
+            self._generate_record_tag("", output, False, record_tag)
 
-        for name, tag in self.record_tags.iteritems():
-            output += "{0}: {1}\n".format(tag.name, tag.total)
-            output += self._get_item_list(tag.item_list)
+        output.append(self._get_total())
 
-        output += self._get_total()
-        return output
+        return "\n".join(output)
 
-    def _get_item_list(self, item_list):
-        output = ""
-        for item in item_list:
-            output += "\t{0}: {1}\n".format(item["name"], item["delta"])
+    def _generate_record_tag(self, indent, output, combine, record_tag):
+        output.append("{}{}: {}".format(indent, record_tag.tag, record_tag.total))
+        new_indent = "{}{}".format("\t", indent)
 
-        return output
+        record_list = record_tag.record_list
+
+        if combine:
+            record_list = record_tag.combine_record_list
+
+        for record in record_list:
+            output.append("{}{}: {}".format(new_indent, record.description, record.total))
+
+        for sub_tag in record_tag.record_tag_list:
+            self._generate_record_tag(new_indent, output, combine, sub_tag)
 
     def _get_total(self):
-        return "Total: {0}".format(self.total)
+        return "Total: {}".format(self.total)
