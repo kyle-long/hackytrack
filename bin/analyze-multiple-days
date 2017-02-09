@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+declare tempName
+
+tempName="/tmp/hackytrack-multiple-days"
+
+finish() {
+    if [[ -f "$tempName" ]]; then
+        rm "$tempName"
+    fi
+}
+
+trap finish EXIT
+
+jqCommand=(jq -s)
+filter=""
+count=0
+
+for file in "$@"; do
+    if [[ ! "$file" ]]; then
+        echo "$file does not exist"
+        exit 1
+    fi
+
+    filter="$filter .[$count]"
+
+    next="$((count + 1))"
+
+    if [[ "$next" != "$#" ]]; then
+        filter="$filter +"
+    fi
+
+    count="$next"
+done
+
+jqCommand+=("$filter" "$@")
+echo "${jqCommand[@]}"
+
+"${jqCommand[@]}" > "$tempName"
+hackyanalyze -v "$tempName"
